@@ -1,0 +1,75 @@
+<div id="title"><h1> MAGAZINUL  DE  CUCI </h1></div>
+
+<div id="application">
+	<div class="products">
+
+		<h2> PRODUCTS </h2>
+		<div clsass="table">
+			<table>
+				<tr>
+					<th>Product Description</th>
+					<th>Unit Price</th>
+					<th>Qty</th>
+					<th></th>
+				</tr>
+
+				<% @products.each do |product|	%>
+					<tr>
+						<td><div><%= product.description %></div></td>
+						<td><div>USD <%= product.price %></div></td>
+						<td><div>#1#</div></td>
+						<td><div>##button##</div></td>
+					</tr>
+				<% end %>
+
+			</table>
+		</div>		
+	</div>
+
+	<div class="products">
+
+		<h2> SHOPPING CART </h2>
+		<div clsass="table">
+			<table>
+				<tr>
+					<th>Product Description</th>
+					<th>Unit Price</th>
+					<th>Qty</th>
+					<th>Item Subtotal</th>
+				</tr>
+
+				<% @products.each do |product|	%>
+					<tr>
+						<td><div><%= product.description %></div></td>
+						<td><div><%= product.price %></div></td>
+						<td><div>#1#</div></td>
+						<td><div>##button##</div></td>
+					</tr>
+				<% end %>
+
+			</table>
+		</div>		
+	</div>
+
+	<div class="products">
+
+		<h2> ADD NEW PRODUCT </h2>
+		<div>
+			<%= form_for @product do |f| %>
+				<table>
+					<tr>				
+						<td><div><%= f.text_field :description,  placeholder: 'description', id: "field_text" %></div></td>
+					    <td><div><%= f.label :price, "USD" %>
+					    		<%= f.number_field :price, placeholder: 'price', id: "field_nr" %>
+					    		</div></td>
+					    <td><div></div></td>
+					    <td><div><%= f.submit "Add Product", id: "button" %></div></td>
+					</tr>
+				</table>
+
+			<% end %> 
+
+		</div>		
+	</div>
+
+</div>
