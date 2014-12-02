@@ -74,15 +74,18 @@ h1 {
 	font-size: 1em;
 	line-height: 1.2em;
 	color: #9E3D54;
-	text-align: center;
+	text-align: left;
 	border-bottom: 1px solid #ECEBD7;
 	padding-right: 40px;
+
 }
 
 .products td {
 	font-size: 0.9em;
 	color: #4A4B4C;
-	padding-right: 40px;
+	text-align: left;
+	padding-right: 20px;
+	min-width: 60px;
 }
 
 #field_text {
@@ -98,7 +101,7 @@ h1 {
 }
 
 #field_nr {
-	width: 50%;
+	width: 40%;
 	height: 24px;
 	font-size: 0.9em;
 	font-weight: bolder;
@@ -125,4 +128,16 @@ h1 {
 
 #button:active {
 	background-color: #84404E;
+}
+
+#total {
+	font-size: 1.5em;
+	line-height: 1.2em;
+	color: #9E3D54;
+	text-align: left;
+	border-top: 1px solid #ECEBD7;
+	border-bottom: 1px solid #ECEBD7;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-weight: bolder;
 }

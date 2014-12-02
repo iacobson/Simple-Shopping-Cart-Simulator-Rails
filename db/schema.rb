@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141201134841) do
+ActiveRecord::Schema.define(version: 20141201164247) do
+
+  create_table "carts", force: true do |t|
+    t.integer  "quantity"
+    t.integer  "product_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "carts", ["product_id"], name: "index_carts_on_product_id"
 
   create_table "products", force: true do |t|
     t.string   "description"

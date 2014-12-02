@@ -17,8 +17,17 @@
 					<tr>
 						<td><div><%= product.description %></div></td>
 						<td><div>USD <%= product.price %></div></td>
-						<td><div>#1#</div></td>
-						<td><div>##button##</div></td>
+
+						<%= form_for [ product, @cart ] do |f| %>
+							<td><div>
+								<%= f.number_field :quantity, min: 1, value: 1,  id: "field_nr" %>
+							</div></td>
+
+							<td><div>
+							<%= f.submit "Add to Cart", id: "button" %>
+							</div></td>
+
+						<% end %>
 					</tr>
 				<% end %>
 
@@ -29,6 +38,10 @@
 	<div class="products">
 
 		<h2> SHOPPING CART </h2>
+
+		<% if @cart_empty != true %>	
+			<!-- if the cart is empty, will not display results from the right column -->
+
 		<div clsass="table">
 			<table>
 				<tr>
@@ -38,18 +51,45 @@
 					<th>Item Subtotal</th>
 				</tr>
 
-				<% @products.each do |product|	%>
+				<% @carts.each do |cart|	%>
+				<% @array_subtotal << Product.where("id is ?", cart.product_id ).first.price.to_i * cart.quantity %>  
 					<tr>
-						<td><div><%= product.description %></div></td>
-						<td><div><%= product.price %></div></td>
-						<td><div>#1#</div></td>
-						<td><div>##button##</div></td>
+						<td><div><%= Product.where("id is ?", cart.product_id ).first.description %></div></td>
+						<td><div>USD <%= Product.where("id is ?", cart.product_id ).first.price %></div></td>
+						<td><div><%= cart.quantity %></div></td>
+						<td><div>USD <%= Product.where("id is ?", cart.product_id ).first.price.to_i * 
+							cart.quantity %></div></td>
 					</tr>
 				<% end %>
+				
+
 
 			</table>
-		</div>		
+
+		</div>
+			<table>
+				<tr>
+					<td><div id="total">Cart TOTAL:   USD <%= @array_subtotal.inject(:+) %> </div></td>
+				</tr>
+
+				
+				<tr>
+					<td><%= button_to "Clear Shopping Cart ", [@firstcart.product, @firstcart], 
+						method: :delete, id: "button"  %></td>
+
+					<!-- [@firstcart.product, @firstcart] is just a path created to direct me to the controller cart/destroy method (needed: )
+					[@firstcart.product, @firstcart] this kind of path is described on the rails tutorial
+					http://guides.rubyonrails.org/getting_started.html chapter 8
+					I need to study this more !!! -->
+
+				</tr>
+				
+			</table>
+		<% end %>
+
 	</div>
+
+	
 
 	<div class="products">
 
@@ -60,7 +100,7 @@
 					<tr>				
 						<td><div><%= f.text_field :description,  placeholder: 'description', id: "field_text" %></div></td>
 					    <td><div><%= f.label :price, "USD" %>
-					    		<%= f.number_field :price, placeholder: 'price', id: "field_nr" %>
+					    		<%= f.number_field :price, placeholder: 'price', min: 1, id: "field_nr" %>
 					    		</div></td>
 					    <td><div></div></td>
 					    <td><div><%= f.submit "Add Product", id: "button" %></div></td>
@@ -71,5 +111,6 @@
 
 		</div>		
 	</div>
+
 
 </div>
